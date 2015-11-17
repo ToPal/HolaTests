@@ -1,4 +1,4 @@
-var filter = require('./filter').filter;
+var filter = require('./filter');
 
 var assert = require('assert');
 var utils = require('util');
