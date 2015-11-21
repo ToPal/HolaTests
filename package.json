@@ -1,0 +1,20 @@
+{
+  "name": "holatests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tests.js",
+  "dependencies": {
+    "deepcopy": "^0.5.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ToPal/HolaTests.git"
+  },
+  "author": "TomshaPavel@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ToPal/HolaTests/issues"
+  },
+  "homepage": "https://github.com/ToPal/HolaTests"
+}
