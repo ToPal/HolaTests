@@ -1,6 +1,10 @@
 "use strict";
 
-var filter = require('./filter').filter;
+var filter = require('./filter');
+
+if (typeof filter != 'function') {
+    filter = filter.filter;
+}
 
 var assert = require('assert');
 var utils = require('util');
@@ -13,8 +17,8 @@ function test(messages, rules, expected) {
     for (var msgName in messages) {
         var resMsg = result[msgName];
         var expMsg = expected[msgName];
-        
-        assert.deepEqual(resMsg, expMsg, utils.format('Error in %s. Expected: %s, actual: %s', 
+
+        assert.deepEqual(resMsg, expMsg, utils.format('Error in %s. Expected: %s, actual: %s',
           msgName, JSON.stringify(expMsg), JSON.stringify(resMsg)));
     }
 
