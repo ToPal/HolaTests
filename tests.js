@@ -707,7 +707,61 @@ var tests = {
         messages: {"msg1":{"from":"2","to":""}},
         rules: [{"from":"*1*2","action":"ok"}],
         expected: {"msg1":[]}
-    }
+    },
+
+    test_96: {
+        messages: {"msg1":{"from":"(sender)","to":""}},
+        rules: [{"from":"(sender)","action":"ok"}],
+        expected: {"msg1":["ok"]}
+    },
+
+    test_97: {
+        messages: {"msg1":{"from":"{sender}","to":""}},
+        rules: [{"from":"{sender}","action":"ok"}],
+        expected: {"msg1":["ok"]}
+    },
+
+    test_98: {
+        messages: {"msg1":{"from":"[sender]","to":""}},
+        rules: [{"from":"[sender]","action":"ok"}],
+        expected: {"msg1":["ok"]}
+    },
+
+    test_99: {
+        messages: {"msg1":{"from":"[sender]","to":""}},
+        rules: [{"from":"[rednes]","action":"ok"}],
+        expected: {"msg1":[]}
+    },
+
+    test_100: {
+        messages: {"msg1":{"from":"$ender","to":""}},
+        rules: [{"from":"$ender","action":"ok"}],
+        expected: {"msg1":["ok"]}
+    },
+
+    test_101: {
+        messages: {"msg1":{"from":"^","to":""}},
+        rules: [{"from":"^","action":"ok"}],
+        expected: {"msg1":["ok"]}
+    },
+
+    test_102: {
+        messages: {"msg1":{"from":"|","to":""}},
+        rules: [{"from":"|","action":"ok"}],
+        expected: {"msg1":["ok"]}
+    },
+
+    test_102: {
+        messages: {"msg1":{"from":"ab","to":""}},
+        rules: [{"from":"a|b","action":"ok"}],
+        expected: {"msg1":[]}
+    },
+
+    test_103: {
+        messages: {"msg1":{"from":"+","to":""}},
+        rules: [{"from":"+","action":"ok"}],
+        expected: {"msg1":["ok"]}
+    },
 };
 
 
