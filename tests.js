@@ -1,6 +1,10 @@
 "use strict";
 
-var filter = require('./filter').filter;
+var filter = require('./filter');
+
+if (typeof filter != 'function') {
+    filter = filter.filter;
+}
 
 var assert = require('assert');
 var utils = require('util');
@@ -13,8 +17,8 @@ function test(messages, rules, expected) {
     for (var msgName in messages) {
         var resMsg = result[msgName];
         var expMsg = expected[msgName];
-        
-        assert.deepEqual(resMsg, expMsg, utils.format('Error in %s. Expected: %s, actual: %s', 
+
+        assert.deepEqual(resMsg, expMsg, utils.format('Error in %s. Expected: %s, actual: %s',
           msgName, JSON.stringify(expMsg), JSON.stringify(resMsg)));
     }
 
@@ -703,7 +707,61 @@ var tests = {
         messages: {"msg1":{"from":"2","to":""}},
         rules: [{"from":"*1*2","action":"ok"}],
         expected: {"msg1":[]}
-    }
+    },
+
+    test_96: {
+        messages: {"msg1":{"from":"(sender)","to":""}},
+        rules: [{"from":"(sender)","action":"ok"}],
+        expected: {"msg1":["ok"]}
+    },
+
+    test_97: {
+        messages: {"msg1":{"from":"{sender}","to":""}},
+        rules: [{"from":"{sender}","action":"ok"}],
+        expected: {"msg1":["ok"]}
+    },
+
+    test_98: {
+        messages: {"msg1":{"from":"[sender]","to":""}},
+        rules: [{"from":"[sender]","action":"ok"}],
+        expected: {"msg1":["ok"]}
+    },
+
+    test_99: {
+        messages: {"msg1":{"from":"[sender]","to":""}},
+        rules: [{"from":"[rednes]","action":"ok"}],
+        expected: {"msg1":[]}
+    },
+
+    test_100: {
+        messages: {"msg1":{"from":"$ender","to":""}},
+        rules: [{"from":"$ender","action":"ok"}],
+        expected: {"msg1":["ok"]}
+    },
+
+    test_101: {
+        messages: {"msg1":{"from":"^","to":""}},
+        rules: [{"from":"^","action":"ok"}],
+        expected: {"msg1":["ok"]}
+    },
+
+    test_102: {
+        messages: {"msg1":{"from":"|","to":""}},
+        rules: [{"from":"|","action":"ok"}],
+        expected: {"msg1":["ok"]}
+    },
+
+    test_102: {
+        messages: {"msg1":{"from":"ab","to":""}},
+        rules: [{"from":"a|b","action":"ok"}],
+        expected: {"msg1":[]}
+    },
+
+    test_103: {
+        messages: {"msg1":{"from":"+","to":""}},
+        rules: [{"from":"+","action":"ok"}],
+        expected: {"msg1":["ok"]}
+    },
 };
 
 
