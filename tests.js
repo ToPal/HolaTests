@@ -2,6 +2,7 @@ var filter = require('./filter').filter;
 
 var assert = require('assert');
 var utils = require('util');
+var deepcopy = require('deepcopy');
 
 function test(messages, rules, expected) {
     var result = filter(messages, rules);
@@ -20,7 +21,7 @@ function test(messages, rules, expected) {
 
 function start_tests() {
     for (var testName in tests) {
-        var t = tests[testName];
+        var t = deepcopy(tests[testName]);
         console.log('test "%s" started', testName);
         test(t.messages, t.rules, t.expected);
     }
